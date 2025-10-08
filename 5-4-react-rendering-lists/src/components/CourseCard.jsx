@@ -45,26 +45,26 @@ export default function CourseCard({ course, index, onMutateCourse }) {
     <article className="course card">
       <header className="cardHeader">
         <h2>{course.title}</h2>
-        {/* 🟩 PART A (Anchor): Show "All caught up" badge when ALL tasks are done (logical &&) */}
+          {allDone && <span className="badge success">All caught up!</span>}
       </header>
 
       {/* 🟩 PART A (Anchor): If NO tasks → show message; ELSE → render the list (ternary ?: ) */}
-      <section className="tasksSection">
-          {/* 📘 TASK 2 — Render Tasks for Each Course */}
-          {/* 🔎 Anchor: You’ll write your code right inside this list. */}
-        <ul className="tasks">
-          {course.tasks.map((task) => (
-              <TaskItem
-                  key={task.id}
-                  task={task}
-                  onToggle={toggleTask}
-                  onDelete={deleteTask}
-              />
-          ))}
-
-      </ul>
-
-      </section>
+        <section className="tasksSection">
+            {course.tasks.length === 0 ? (
+                <p>No tasks yet. Add your first one below.</p>
+            ) : (
+                <ul className="tasks">
+                    {course.tasks.map((task) => (
+                        <TaskItem
+                            key={task.id}
+                            task={task}
+                            onToggle={toggleTask}
+                            onDelete={deleteTask}
+                        />
+                    ))}
+                </ul>
+            )}
+        </section>
 
 
       {/* Add Form (provided) */}
