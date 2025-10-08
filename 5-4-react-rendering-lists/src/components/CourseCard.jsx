@@ -10,12 +10,14 @@ export default function CourseCard({ course, index, onMutateCourse }) {
   // 📘 TASK 4 — PART A (Anchor): Implement toggle using onMutateCourse + .map()
   function toggleTask(id) {
     // TODO: toggle the task with this id
+
   }
 
 
   // 📘 TASK 4 — PART A (Anchor): Implement delete using onMutateCourse + .filter()
   function deleteTask(id) {
     // TODO: delete the task with this id
+
   }
 
 
@@ -24,8 +26,20 @@ export default function CourseCard({ course, index, onMutateCourse }) {
     e.preventDefault();
     // TODO: create a new task { id, title, dueDate: date, isDone: false }
     // TODO: append it to existing tasks and reset inputs
-  }
+      if (!title.trim() || !date) return;
+      const newTask = {
+          id: Date.now(),
+          title: title.trim(),
+          dueDate: date,
+          isDone: false,
+      };
 
+      // 📘 TASK 4 — PART A (Anchor): Implement add using onMutateCourse
+
+  }
+    const allDone =
+        course.tasks.length > 0 &&
+        course.tasks.every((t) => t.isDone);
 
   return (
     <article className="course card">
@@ -34,14 +48,22 @@ export default function CourseCard({ course, index, onMutateCourse }) {
         {/* 🟩 PART A (Anchor): Show "All caught up" badge when ALL tasks are done (logical &&) */}
       </header>
 
-
       {/* 🟩 PART A (Anchor): If NO tasks → show message; ELSE → render the list (ternary ?: ) */}
       <section className="tasksSection">
-        {/* 📘 TASK 2 — Render Tasks for Each Course */}
-        {/* 🔎 Anchor: You’ll write your code right inside this list. */}
+          {/* 📘 TASK 2 — Render Tasks for Each Course */}
+          {/* 🔎 Anchor: You’ll write your code right inside this list. */}
         <ul className="tasks">
-          {/* TODO: course.tasks.map(task => <TaskItem key={task.id} task={task} onToggle={toggleTask} onDelete={deleteTask} />) */}
-        </ul>
+          {course.tasks.map((task) => (
+              <TaskItem
+                  key={task.id}
+                  task={task}
+                  onToggle={toggleTask}
+                  onDelete={deleteTask}
+              />
+          ))}
+
+      </ul>
+
       </section>
 
 
